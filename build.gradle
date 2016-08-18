@@ -30,8 +30,6 @@ task makeapi(dependsOn: ':api:playBinary') {
 
 task makeapp(dependsOn: [makefe, makeapi]) {
     doLast {
-        delete 'api/build'
-        delete 'frontend/dest'
         println 'build done!'
     }
 }
