@@ -37,7 +37,6 @@ task makefe(dependsOn: ':frontend:build') {
         copy {
             from 'frontend/dest'
             into 'dest/public'
-            into 'api/public'
         };
         println 'frontend was built successfully!'
     }
@@ -56,8 +55,6 @@ task makeapi(dependsOn: ':api:playBinary') {
 
 task makeapp(dependsOn: [makefe, makeapi]) {
     doLast {
-//        delete 'frontend/dest'
-//        delete 'api/build'
         println 'build done!'
     }
 }
@@ -69,10 +66,10 @@ task startapi(dependsOn: [makeapp, ':api:runPlayBinary']) {
     }
 }
 
-task start(type: PlayRun, dependsOn: makeapp) << {
-    applicationJar file('dest/build/playBinary/lib/api.jar')
-    assetsJar file('dest/build/playBinary/lib/api-assets.jar')
-    assetsDirs[file('dest/public')]
+task start(type: PlayRun, dependsOn: makeapp) {
+    applicationJar = file("dest/build/playBinary/lib/api.jar")
+    assetsJar = file("dest/build/playBinary/lib/api-assets.jar")
+    assetsDirs = [file("dest/public")]
 }
 
 
