@@ -3,31 +3,6 @@ plugins {
     id 'play'
 }
 
-repositories {
-    jcenter()
-    mavenLocal()
-    ivy {
-        url "file://${System.properties['user.home']}/.ivy2/cache"
-        layout 'pattern', {
-            artifact "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
-            ivy "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
-        }
-    }
-    maven {
-        name 'typesafe-maven-release'
-        url 'https://repo.typesafe.com/typesafe/maven-releases'
-    }
-    ivy {
-        name 'typesafe-ivy-release'
-        url 'https://repo.typesafe.com/typesafe/ivy-releases'
-        layout 'ivy'
-    }
-}
-
-dependencies {
-    play project(':api')
-}
-
 project.description = 'iMaster - lightweight project to manage university masters'
 project.group = 'by.slesh'
 project.version = '1.0.0'
@@ -55,6 +30,8 @@ task makeapi(dependsOn: ':api:playBinary') {
 
 task makeapp(dependsOn: [makefe, makeapi]) {
     doLast {
+        delete 'api/build'
+        delete 'frontend/dest'
         println 'build done!'
     }
 }
@@ -66,11 +43,49 @@ task startapi(dependsOn: [makeapp, ':api:runPlayBinary']) {
     }
 }
 
-task start(type: PlayRun, dependsOn: makeapp) {
+tasks.withType(PlayRun) {
     applicationJar = file("dest/build/playBinary/lib/api.jar")
     assetsJar = file("dest/build/playBinary/lib/api-assets.jar")
     assetsDirs = [file("dest/public")]
+    httpPort = 8888
 }
+
+dependencies {
+    play project(':api')
+}
+
+model {
+    components {
+        play {
+            platform play: '2.4.8', scala: '2.11', java: '1.8'
+            injectedRoutesGenerator = true
+        }
+    }
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    ivy {
+        url "file://${System.properties['user.home']}/.ivy2/cache"
+        layout 'pattern', {
+            artifact "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
+            ivy "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
+        }
+    }
+    maven {
+        name 'typesafe-maven-release'
+        url 'https://repo.typesafe.com/typesafe/maven-releases'
+    }
+    ivy {
+        name 'typesafe-ivy-release'
+        url 'https://repo.typesafe.com/typesafe/ivy-releases'
+        layout 'ivy'
+    }
+}
+
+
+
 
 
 
