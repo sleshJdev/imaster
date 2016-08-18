@@ -7,6 +7,10 @@ project.description = 'api of iMaster'
 project.group = 'by.slesh'
 project.version = '1.0.0'
 
+tasks.withType(PlayRun) {
+    httpPort = 8888
+}
+
 idea.module {
     // Source directories
     sourceDirs += file('app')

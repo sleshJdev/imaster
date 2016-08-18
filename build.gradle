@@ -11,7 +11,7 @@ task makefe(dependsOn: ':frontend:build') {
     doLast {
         copy {
             from 'frontend/dest'
-            into 'dest/public'
+            into 'api/public'
         };
         println 'frontend was built successfully!'
     }
@@ -20,10 +20,6 @@ task makefe(dependsOn: ':frontend:build') {
 task makeapi(dependsOn: ':api:playBinary') {
     mustRunAfter makefe
     doLast {
-        copy {
-            from 'api/build'
-            into 'dest/build'
-        };
         println 'api was built successfully!'
     }
 }
@@ -38,47 +34,6 @@ task startapi(dependsOn: [makeapp, ':api:runPlayBinary']) {
     mustRunAfter makeapp
     doLast {
         println 'started'
-    }
-}
-
-tasks.withType(PlayRun) {
-    applicationJar = file("dest/build/playBinary/lib/api.jar")
-    assetsJar = file("dest/build/playBinary/lib/api-assets.jar")
-    assetsDirs = [file("dest/public")]
-    httpPort = 8888
-}
-
-dependencies {
-    play project(':api')
-}
-
-model {
-    components {
-        play {
-            platform play: '2.4.8', scala: '2.11', java: '1.8'
-            injectedRoutesGenerator = true
-        }
-    }
-}
-
-repositories {
-    jcenter()
-    mavenLocal()
-    ivy {
-        url "file://${System.properties['user.home']}/.ivy2/cache"
-        layout 'pattern', {
-            artifact "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
-            ivy "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
-        }
-    }
-    maven {
-        name 'typesafe-maven-release'
-        url 'https://repo.typesafe.com/typesafe/maven-releases'
-    }
-    ivy {
-        name 'typesafe-ivy-release'
-        url 'https://repo.typesafe.com/typesafe/ivy-releases'
-        layout 'ivy'
     }
 }
 
