@@ -24,32 +24,37 @@ function buildJs() {
         .pipe($.angularFilesort())
         .pipe($.concat('script.js'))
         .pipe($.uglify({compress: {join_vars: false, sequences: false}}))
-        .pipe($.sourcemaps.write())
+        .pipe($.sourcemaps.write('../maps'))
         .pipe(gulp.dest(path.join(conf.dest, 'scripts')));
 }
 
 function buildHtml() {
     return gulp.src(conf.html)
+        .pipe($.sourcemaps.init())
         .pipe($.htmlmin({collapseWhitespace: true}))
         .pipe($.angularTemplatecache('templates.js', {module: conf.module, base: path.resolve(conf.src)}))
+        .pipe($.uglify({compress: {join_vars: false, sequences: false}}))
+        .pipe($.sourcemaps.write('../maps'))
         .pipe(gulp.dest(path.join(conf.dest, 'scripts')));
 }
 
 function buildJsVendor() {
     return gulp.src('./bower.json')
         .pipe($.mainBowerFiles())
-        //.pipe($.sourcemaps.init())
+        .pipe($.sourcemaps.init())
         .pipe($.concat('vendor.js'))
         .pipe($.uglify({compress: {join_vars: false, sequences: false}}))
-        //.pipe($.sourcemaps.write())
+        .pipe($.sourcemaps.write('../maps'))
         .pipe(gulp.dest(path.join(conf.dest, 'scripts')));
 }
 
 function buildCss() {
     return gulp.src(conf.css)
+        .pipe($.sourcemaps.init())
         .pipe($.sass().on('error', $.sass.logError))
         .pipe($.concat('style.css'))
         .pipe($.cleanCss())
+        .pipe($.sourcemaps.write('../maps'))
         .pipe(gulp.dest(path.join(conf.dest, 'styles')));
 }
 

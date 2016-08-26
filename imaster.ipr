@@ -63,6 +63,9 @@
     <setting name="root" />
   </component>
   <component name="IdProvider" IDEtalkID="11DA1DB66DD62DDA1ED602B7079FE97C" />
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/frontend" libraries="{frontend node_modules}" />
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
     <option name="OPTION_SCOPE" value="protected" />
@@ -231,6 +234,19 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
+    <library name="frontend node_modules" type="javaScript">
+      <properties>
+        <option name="frameworkName" value="node_modules" />
+        <sourceFilesUrls>
+          <item url="file://$PROJECT_DIR$/frontend/node_modules" />
+        </sourceFilesUrls>
+      </properties>
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/frontend/node_modules" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="Gradle: aopalliance:aopalliance:1.0">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar!/" />

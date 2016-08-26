@@ -6,19 +6,19 @@ var conf = require('./gulp/conf');
 var tasks = require('./gulp/build');
 
 gulp.task('build:js', function () {
-    return tasks.buildJs();
+    return tasks.buildJs().pipe(browser.stream({match: '**/*.js'}));
 });
 
 gulp.task('build:html', function () {
-    return tasks.buildHtml();
+    return tasks.buildHtml().pipe(browser.stream({match: '**/*.js'}));
 });
 
 gulp.task('build:js:vendor', function () {
-    return tasks.buildJsVendor();
+    return tasks.buildJsVendor().pipe(browser.stream({match: '**/*.js'}));
 });
 
 gulp.task('build:css', function () {
-    return tasks.buildCss();
+    return tasks.buildCss().pipe(browser.stream({match: '**/*.css'}));
 });
 
 gulp.task('clean', function () {
@@ -39,8 +39,7 @@ gulp.task('build:dev', ['copy:index'], function () {
 
 gulp.task('watch', ['build:dev'], function () {
     function onChange(e) {
-        $.util.log(e.type, ': ', e.path);
-        browser.reload();
+        $.util.log(e.type, ': ', path.relative('./', e.path));
     }
 
     gulp.watch(conf.css, ['build:css']).on('change', onChange);
@@ -50,7 +49,10 @@ gulp.task('watch', ['build:dev'], function () {
 
 gulp.task('serve', ['watch'], function () {
     var proxy = require('http-proxy-middleware');
-    var apiProxy = proxy('/api', {target: 'http://localhost:8080', changeOrigin: true});
+    var apiProxy = proxy('/api', {
+        target: 'http://localhost:8888',
+        changeOrigin: true
+    });
 
     browser.init({
         ui: {port: 3001},

@@ -17,7 +17,7 @@ task makefe(dependsOn: ':frontend:build') {
     }
 }
 
-task makeapi(dependsOn: ':api:playBinary') {
+task makeapi(dependsOn: ':api:dist') {
     mustRunAfter makefe
     doLast {
         println 'api was built successfully!'
@@ -26,17 +26,21 @@ task makeapi(dependsOn: ':api:playBinary') {
 
 task makeapp(dependsOn: [makefe, makeapi]) {
     doLast {
+        copy {
+            from(zipTree('api/build/distributions/playBinary.zip'))
+            into 'dest'
+        }
         println 'build done!'
     }
 }
 
-task startapi(dependsOn: [makeapp, ':api:runPlayBinary']) {
-    mustRunAfter makeapp
-    doLast {
-        println 'started'
-    }
+task clean << {
+    delete 'dest'
 }
 
+task runapp(type: Exec) {
+    commandLine './dest/playBinary/bin/playBinary'
+}
 
 
 
