@@ -5,7 +5,8 @@ logs
 node_modules
 bower_components
 public
-
+typings
+dist
 
 # Ignore Play! working directory #
 bin/

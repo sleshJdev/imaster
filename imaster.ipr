@@ -64,7 +64,9 @@
   </component>
   <component name="IdProvider" IDEtalkID="11DA1DB66DD62DDA1ED602B7079FE97C" />
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/frontend" libraries="{frontend node_modules}" />
+    <file url="file://$PROJECT_DIR$/frontend" libraries="{ECMAScript 6, HTML}" />
+    <excludedPredefinedLibrary name="HTML" />
+    <excludedPredefinedLibrary name="HTML5 / EcmaScript 5" />
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -229,6 +231,12 @@
   </component>
   <component name="SvnBranchConfigurationManager">
     <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+  <component name="TypeScriptCompiler">
+    <option name="isCompilerEnabled" value="true" />
+    <option name="scopeName" value="Module 'frontend'" />
+    <option name="trackFileSystemChanges" value="false" />
+    <option name="useConfig" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />

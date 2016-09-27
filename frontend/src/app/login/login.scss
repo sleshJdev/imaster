@@ -1,0 +1,22 @@
+form.login-form {
+  border: #f1fe11;
+}
+
+.form-row {
+  input {
+    float: right;
+  }
+  label::after {
+    clear: left;
+  }
+  input, label {
+    box-sizing: border-box;
+    display: inline-block;
+  }
+}
+
+.form-header {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
