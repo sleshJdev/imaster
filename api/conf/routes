@@ -1,2 +1,9 @@
-GET        /                    controllers.Assets.at(path="/public", file="index.html")
-GET        /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /                    controllers.Assets.at(path="/public", file="index.html")
+GET         /favicon.ico         controllers.Assets.at(path="/public", file="favicon.ico")
+GET         /assets/*file        controllers.Assets.at(path="/public/assets", file)
+
+
+#HomeController
+
+POST        /login               controllers.LoginController.login()
+POST        /users               controllers.UserController.save()

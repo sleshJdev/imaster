@@ -1,14 +1,7 @@
-task clean << {
-    exec { commandLine 'gulp', 'clean' }
-}
-
-task build << {
-    exec { commandLine 'npm', 'i' }
-    exec { commandLine 'bower', 'i' }
-    exec { commandLine 'gulp', 'build:prod' }
-}
-
 project.description = 'frontend of iMaster'
 project.group = 'by.slesh.frontend'
 project.version = '1.0.0'
 
+task build(type: Exec) {
+    commandLine 'webpack';
+}

@@ -1,25 +1,18 @@
 .gradle
-dest
+
+.idea
+*.iml
+*.ipr
+*.iws
+
+
 build
 logs
+
 node_modules
 bower_components
-public
-typings
 dist
+frontend/src/app/**/*.js
+typings
 
-# Ignore Play! working directory #
-bin/
-/db
-.eclipse
-/lib/
-/logs/
-/modules
-/project/target
-/target
-tmp/
-test-result
-server.pid
-*.eml
-/dist/
-.cache
+

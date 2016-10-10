@@ -1,22 +1,30 @@
-form.login-form {
-  border: #f1fe11;
-}
+.form--login-wrapper {
+  .form--login {
+    width: 300px;
+    margin: 0 auto;
 
-.form-row {
-  input {
-    float: right;
-  }
-  label::after {
-    clear: left;
-  }
-  input, label {
-    box-sizing: border-box;
-    display: inline-block;
+    .form__header {
+      font-family: "DejaVu Sans", serif;
+      font-size: 1.2em;
+    }
+
+    .form__row {
+      input[type=text] {
+        display: block;
+        width: 100%;
+      }
+      label {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .form__footer {
+      margin-top: 1em;
+      button {
+        float: right;
+      }
+    }
+
   }
 }
-
-.form-header {
-  font-weight: bold;
-  font-size: 1.1em;
-}
-

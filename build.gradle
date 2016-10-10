@@ -1,6 +1,5 @@
-plugins {
-    id 'idea'
-    id 'play'
+allprojects {
+    apply plugin: 'idea'
 }
 
 project.description = 'iMaster - lightweight project to manage university masters'
@@ -10,7 +9,7 @@ project.version = '1.0.0'
 task makefe(dependsOn: ':frontend:build') {
     doLast {
         copy {
-            from 'frontend/dest'
+            from 'frontend/dist'
             into 'api/public'
         };
         println 'frontend was built successfully!'
@@ -34,7 +33,7 @@ task makeapp(dependsOn: [makefe, makeapi]) {
     }
 }
 
-task clean << {
+task cleanBinary << {
     delete 'dest'
 }
 
