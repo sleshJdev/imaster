@@ -14,5 +14,3 @@ bower_components
 dist
 frontend/src/app/**/*.js
 typings
-
-
