@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component} from "@angular/core";
 import {Router} from '@angular/router'
 import {User}      from '../user/models/user.model';
 import {LoginService} from "./login.service";
@@ -16,9 +16,8 @@ export class LoginComponent {
     }
 
     logIn(user: User) {
-        let self = this;
         this.loginService.logIn(user)
-            .then(() => self.router.navigate(['home']))
+            .then(() => this.router.navigate(['home']))
             .catch((error: any) => {
                 let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
                 console.error(errMsg);
