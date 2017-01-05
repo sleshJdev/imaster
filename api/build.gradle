@@ -2,29 +2,8 @@ plugins {
     id 'play'
 }
 
-project.description = 'api of iMaster'
-project.group = 'by.slesh'
-project.version = '1.0.0'
-
-dependencies {
-    play 'com.typesafe.play:play-slick_2.11:2.0.2'
-    play 'com.typesafe.play:play-slick-evolutions_2.11:2.0.2'
-    play 'org.postgresql:postgresql:9.4-1204-jdbc42'
-}
-
 repositories {
     jcenter()
-    ivy {
-        url "file://${System.properties['user.home']}/.ivy2/cache"
-        layout 'pattern', {
-            artifact "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
-            ivy "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
-        }
-    }
-    maven {
-        name "typesafe-maven-release"
-        url "https://repo.typesafe.com/typesafe/maven-releases"
-    }
     ivy {
         url "https://repo.typesafe.com/typesafe/ivy-releases/"
         layout "pattern", {
@@ -32,6 +11,12 @@ repositories {
             artifact "[organisation]/[module]/[revision]/jars/[artifact].[ext]"
         }
     }
+}
+
+dependencies {
+    play 'com.typesafe.play:play-slick_2.11:2.0.0'
+    play 'com.typesafe.play:play-slick-evolutions_2.11:2.0.0'
+    play 'org.postgresql:postgresql:9.4-1204-jdbc42'
 }
 
 model {
@@ -44,8 +29,12 @@ model {
 }
 
 tasks.withType(PlayRun) {
-    httpPort = 8888
+    forkOptions.jvmArgs = ['-Xdebug',
+                           '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999']
 }
 
+tasks.getByName('clean').doFirst { delete file('public') }
+
+task runapi(dependsOn: 'runPlayBinary')
 
 

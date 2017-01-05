@@ -1,0 +1,27 @@
+<div class="text--center">
+    <div class="form form--login">
+        <div class="form__header">
+            <p>Log In</p>
+        </div>
+        <div class="form__body">
+            <div class="form__row">
+                <label>
+                    <input type="text" [(ngModel)]="username">
+                    <span>Name:</span>
+                </label>
+            </div>
+            <div class="form__row">
+                <label>
+                    <input type="text" [(ngModel)]="password">
+                    <span>Password:</span>
+                </label>
+            </div>
+        </div>
+        <div class="form__footer">
+            <div class="btn-group btn-group--right">
+                <input type="button" class="btn-group__item btn btn" (click)="location.back()" value="Cancel">
+                <input type="button" class="btn-group__item btn btn--info" (click)="login()" value="Log In">
+            </div>
+        </div>
+    </div>
+</div>

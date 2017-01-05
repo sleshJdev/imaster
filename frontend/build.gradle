@@ -1,7 +1,5 @@
-project.description = 'frontend of iMaster'
-project.group = 'by.slesh.frontend'
-project.version = '1.0.0'
+task clean(type: Delete) { delete buildDir }
 
-task build(type: Exec) {
-    commandLine 'webpack';
-}
+task build(type: Exec) { commandLine 'npm', 'run', 'build' }
+
+task watch(type: Exec) { commandLine 'npm', 'run', 'watch' }

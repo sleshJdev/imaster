@@ -1,12 +1,9 @@
 {
   "globalDependencies": {
-    "core-js": "registry:dt/core-js#0.0.0+20160725163759",
-    "reflect-metadata": "registry:dt/reflect-metadata#0.0.0+20160630155503"
-  },
-  "devDependencies": {
-    "requirejs": "registry:npm/requirejs#2.2.0+20160319062357"
+    "core-js": "registry:dt/core-js#0.9.7+20161130133742",
+    "reflect-metadata": "registry:dt/reflect-metadata#0.0.0+20161005184000"
   },
   "globalDevDependencies": {
-    "node": "registry:dt/node#6.0.0+20160907173219"
+    "node": "registry:dt/node#6.0.0+20161229171858"
   }
 }
