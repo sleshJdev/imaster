@@ -1,47 +1,17 @@
 allprojects {
     apply plugin: 'idea'
+    group = 'by.slesh.bntu.imaster'
+    version = '1.0.0'
 }
 
-project.description = 'iMaster - lightweight project to manage university masters'
-project.group = 'by.slesh'
-project.version = '1.0.0'
+task clean(dependsOn: [':api:clean', ':frontend:clean'])
 
-task makefe(dependsOn: ':frontend:build') {
-    doLast {
+task build(dependsOn: ['clean', ':frontend:build']) {
+    mustRunAfter clean
+    doFirst {
         copy {
-            from 'frontend/dist'
-            into 'api/public'
-        };
-        println 'frontend was built successfully!'
-    }
-}
-
-task makeapi(dependsOn: ':api:dist') {
-    mustRunAfter makefe
-    doLast {
-        println 'api was built successfully!'
-    }
-}
-
-task makeapp(dependsOn: [makefe, makeapi]) {
-    doLast {
-        copy {
-            from(zipTree('api/build/distributions/playBinary.zip'))
-            into 'dest'
+            from './frontend/build'
+            into './api/public'
         }
-        println 'build done!'
     }
 }
-
-task cleanBinary << {
-    delete 'dest'
-}
-
-task runapp(type: Exec) {
-    commandLine './dest/playBinary/bin/playBinary'
-}
-
-
-
-
-

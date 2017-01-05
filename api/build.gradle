@@ -2,83 +2,8 @@ plugins {
     id 'play'
 }
 
-project.description = 'api of iMaster'
-project.group = 'by.slesh'
-project.version = '1.0.0'
-
-idea.module {
-    // Source directories
-    sourceDirs += file('app')
-    testSourceDirs += file('test')
-
-    // Generated sources
-    def generated = [
-            file("$buildDir/playBinary/src/compilePlayBinaryRoutes"),
-            file("$buildDir/playBinary/src/compilePlayBinaryTwirlTemplates")
-    ]
-    generated.each { src ->
-        sourceDirs += src
-        generatedSourceDirs += src
-    }
-
-    // Output directories
-    outputDir = file("$buildDir/playBinary/classes")
-    testOutputDir = file("$buildDir/playBinary/testClasses")
-
-    // Excluded dirs
-    excludeDirs -= buildDir
-    excludeDirs += [
-            outputDir,
-            testOutputDir,
-            file("$buildDir/playBinary/lib"),
-            file("$buildDir/playBinary/reports"),
-            file("$buildDir/playBinary/results"),
-            file("$buildDir/tmp"),
-            file("$buildDir/assets")
-    ]
-
-    // Dependencies
-    scopes.COMPILE = [ 'plus' : [ configurations.play ] ]
-    scopes.TEST = [ 'plus' : [ configurations.playTest ] ]
-
-    iml.withXml { provider ->
-        def content = provider.node.component.content.first()
-
-        // Resources
-        def confUrl = 'file://$MODULE_DIR$/conf'
-        def confAttrs = content.find { it.@url == confUrl }?.attributes()
-        if (confAttrs) {
-            confAttrs.remove('isTestSource')
-            confAttrs.type = 'java-resource'
-        } else {
-            content.appendNode('sourceFolder', [url: confUrl, type: 'java-resource'])
-        }
-
-        // Test resources
-        def testResourcesUrl = 'file://$MODULE_DIR$/test/resources'
-        def testResourcesAttrs = content.find { it.@url == testResourcesUrl }?.attributes()
-        if (testResourcesAttrs) {
-            testResourcesAttrs.remove('isTestSource')
-            testResourcesAttrs.type = 'java-test-resource'
-        } else {
-            content.appendNode('sourceFolder', [url: testResourcesUrl, type: 'java-resource'])
-        }
-    }
-}
-
 repositories {
     jcenter()
-    ivy {
-        url "file://${System.properties['user.home']}/.ivy2/cache"
-        layout 'pattern', {
-            artifact "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
-            ivy "[organisation]/[module]/[revision]/[type]s/[artifact].[ext]"
-        }
-    }
-    maven {
-        name "typesafe-maven-release"
-        url "https://repo.typesafe.com/typesafe/maven-releases"
-    }
     ivy {
         url "https://repo.typesafe.com/typesafe/ivy-releases/"
         layout "pattern", {
@@ -92,13 +17,7 @@ dependencies {
     play 'com.typesafe.play:play-slick_2.11:2.0.0'
     play 'com.typesafe.play:play-slick-evolutions_2.11:2.0.0'
     play 'org.postgresql:postgresql:9.4-1204-jdbc42'
-
-    play 'org.slf4j:slf4j-api:1.6.4'
-    play 'ch.qos.logback:logback-classic:1.0.1'
-    play 'ch.qos.logback:logback-core:1.0.1'
 }
-
-
 
 model {
     components {
@@ -109,14 +28,13 @@ model {
     }
 }
 
-
 tasks.withType(PlayRun) {
-    httpPort = 8899
     forkOptions.jvmArgs = ['-Xdebug',
                            '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999']
 }
 
+tasks.getByName('clean').doFirst { delete file('public') }
 
-
+task runapi(dependsOn: 'runPlayBinary')
 
 

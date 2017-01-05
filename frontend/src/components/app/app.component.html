@@ -1,0 +1,26 @@
+<header class="header">
+    <div class="menu">
+        <div class="menu-bar">
+            <div class="menu-bar__item">
+                <a routerLink='/' routerLinkActive="active">Home</a>
+            </div>
+            <div class="menu-bar__item">
+                <a routerLink='/users' routerLinkActive="active">Users</a>
+            </div>
+            <div class="menu-bar__item">
+                <a *ngIf="!isLoggedIn()" routerLink="/login" routerLinkActive="active">Log In</a>
+            </div>
+            <div *ngIf="isLoggedIn()" class="menu-bar__item">
+                <a [routerLink]="['/account', getUserDetails().id]" routerLinkActive="active">{{getUserDetails().name}}</a>
+                <button type="button" (click)="logout()" routerLinkActive="active">Log Out</button>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+<footer class="footer">
+
+</footer>
+

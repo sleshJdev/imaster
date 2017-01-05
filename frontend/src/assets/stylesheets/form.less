@@ -1,0 +1,43 @@
+@import "./color.less";
+
+.form {
+  display: inline-block;
+  border: 1px solid @default-gray;
+  padding: 0.5em;
+
+  .form__header {
+    text-align: right;
+    vertical-align: middle;
+    border-bottom: 1px solid @default-gray;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+  }
+
+  .form__body {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 1em;
+  }
+
+  .form__footer {
+    clear: both;
+  }
+
+  .form__row {
+    margin-bottom: 0.7em;
+    label {
+      display: inline-block;
+      width: 100%;
+      line-height: 2em;
+      text-align: left;
+    }
+    input, selector, textarea {
+      width: auto;
+      float: right;
+      padding: 0.5em;
+      margin-left: 0.5em;
+    }
+  }
+}
+

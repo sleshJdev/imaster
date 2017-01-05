@@ -1,0 +1,65 @@
+@import "./color.less";
+
+.btn {
+  display: inline-block;
+  border: none;
+  color: @default-black;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background-color: @default-white;
+  &:hover {
+    background-color: @default-gray;
+  }
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+}
+
+.btn--success {
+  color: @default-white;
+  background-color: @success-color;
+  &:hover {
+    background-color: darken(@success-color, 10%) !important;
+  }
+}
+
+.btn--warning {
+  color: @default-white;
+  background-color: @warning-color;
+  &:hover {
+    background-color: darken(@warning-color, 10%) !important;
+  }
+}
+
+.btn--dander {
+  color: @default-white;
+  background-color: @error-color;
+  &:hover {
+    background-color: darken(@error-color, 10%) !important;
+  }
+}
+
+.btn--info {
+  color: @default-white;
+  background-color: @info-color;
+  &:hover {
+    background-color: darken(@info-color, 10%) !important;
+  }
+}
+
+.btn-group--right {
+  float: right;
+}
+
+.btn-group__item {
+  display: block;
+  float: left;
+  &:not(:last-child) {
+    border-right: none;
+  }
+  &:not(:first-child) {
+    border-left: none;
+  }
+}
