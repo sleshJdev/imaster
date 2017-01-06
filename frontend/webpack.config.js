@@ -56,7 +56,7 @@ module.exports = function (params) {
                 , {
                     test: /\.*$/,
                     include: /assets\/icons\//,
-                    loader: 'file?name[1].[ext]&regExp=assets/(.*)'
+                    loader: 'file?name=[1].[ext]&regExp=assets/(.*)'
                 }
             ]
         }
