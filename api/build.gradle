@@ -14,15 +14,18 @@ repositories {
 }
 
 dependencies {
-    play 'com.typesafe.play:play-slick_2.11:2.0.0'
-    play 'com.typesafe.play:play-slick-evolutions_2.11:2.0.0'
+    play 'com.typesafe.play:play-slick_2.10:1.1.1'
+    play 'com.typesafe.play:play-slick-evolutions_2.10:1.1.1'
     play 'org.postgresql:postgresql:9.4-1204-jdbc42'
+
+    play 'ch.qos.logback:logback-core:1.1.3'
+    play 'ch.qos.logback:logback-classic:1.1.3'
 }
 
 model {
     components {
         play {
-            platform play: '2.5.8', scala: '2.11', java: '1.8'
+            platform play: '2.4.2', scala: '2.10', java: '1.8'
             injectedRoutesGenerator = true
         }
     }

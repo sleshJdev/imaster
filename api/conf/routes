@@ -1,7 +1,7 @@
-GET         /                    controllers.Assets.at(path="/public", file="index.html")
-
 POST        /api/login           controllers.LoginController.login()
 
 GET         /api/users           controllers.UserController.all()
+
+GET         /                    controllers.Assets.at(path="/public", file="index.html")
 
 GET         /assets/*file        controllers.Assets.at(path="/public", file)

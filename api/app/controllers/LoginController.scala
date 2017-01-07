@@ -1,6 +1,7 @@
 package controllers
 
 import com.google.inject.Inject
+import org.slf4j.LoggerFactory
 import persistence.service.{User, Users}
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
@@ -16,12 +17,15 @@ class LoginController @Inject()(users: Users) extends Controller {
   import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
   implicit val credentialsReads: Reads[(String, String)] =
-    (JsPath \ "name").read[String] and
+      (JsPath \ "name").read[String] and
       (JsPath \ "password").read[String] tupled
+
+  val logger = LoggerFactory.getLogger(getClass)
 
   def login = Action.async(bodyParser = BodyParsers.parse.json) { request =>
     request.body.validate(credentialsReads) match {
       case s: JsSuccess[(String, String)] =>
+        logger.debug("attempt to login with " + s.value)
         users.findByName(s.value._1) map {
           dbuser => {
             dbuser match {
