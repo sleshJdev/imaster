@@ -6,7 +6,13 @@ allprojects {
 
 task clean(dependsOn: [':api:clean', ':frontend:clean'])
 
-task build(dependsOn: ['clean', ':frontend:build']) {
+task buildfe(dependsOn: ':frontend:build')
+
+task distapi(dependsOn: ':api:dist') {
+    mustRunAfter buildfe
+}
+
+task build(dependsOn: ['clean', buildfe, distapi]) {
     mustRunAfter clean
     doFirst {
         file('./frontend/build').renameTo(file('./api/public'))
