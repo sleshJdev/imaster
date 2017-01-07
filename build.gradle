@@ -9,9 +9,6 @@ task clean(dependsOn: [':api:clean', ':frontend:clean'])
 task build(dependsOn: ['clean', ':frontend:build']) {
     mustRunAfter clean
     doFirst {
-        copy {
-            from './frontend/build'
-            into './api/public'
-        }
+        file('./frontend/build').renameTo(file('./api/public'))
     }
 }
