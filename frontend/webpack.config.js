@@ -7,7 +7,7 @@ module.exports = function (params) {
     return {
         context: __dirname + '/src'
         , entry: {
-            main: './main'
+            bundle: './main'
         }
         , output: {
             path: __dirname + '/build'
