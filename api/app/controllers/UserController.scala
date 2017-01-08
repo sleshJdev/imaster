@@ -11,7 +11,7 @@ class UserController @Inject()(private val users: Users) extends Controller {
   import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
   def all = Action.async { request =>
-    var future = users.all
+    var future = users.getAll
     future.map(all => {
       Ok(Json.toJson(all.map(it => User(it.id, it.name, "", it.roles))))
     })

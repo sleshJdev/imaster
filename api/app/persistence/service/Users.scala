@@ -27,8 +27,6 @@ class Users @Inject()(protected val dbConfigProvider: DatabaseConfigProvider,
 
   private val models = TableQuery[UserTable]
 
-  def all: Future[Seq[User]] = db.run(models.result)
-
   def insert(user: User): Future[Int] = {
     val query = (models returning models.map(_.id) into ((user, id) => id)) += user
     db.run(query).map(_.toInt)
