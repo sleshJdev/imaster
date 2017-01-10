@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     play 'org.slf4j:slf4j-nop:1.6.4'
-    play 'ch.qos.logback:logback-classic:1.1.8'
+    play 'ch.qos.logback:logback-core:1.1.8'
     play 'ch.qos.logback:logback-classic:1.1.8'
 }
 
