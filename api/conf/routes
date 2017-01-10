@@ -1,7 +1,5 @@
-GET         /                    controllers.Assets.at(path="/public", file="index.html")
+GET         /                        controllers.Assets.at(path="/public", file="index.html")
 
-POST        /api/login           controllers.LoginController.login()
+GET         /api/log/:message        controllers.LogController.log(message)
 
-GET         /api/users           controllers.UserController.all()
-
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file            controllers.Assets.at(path="/public", file)

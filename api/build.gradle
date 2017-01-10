@@ -14,9 +14,9 @@ repositories {
 }
 
 dependencies {
-    play 'com.typesafe.play:play-slick_2.11:2.0.0'
-    play 'com.typesafe.play:play-slick-evolutions_2.11:2.0.0'
-    play 'org.postgresql:postgresql:9.4-1204-jdbc42'
+    play 'org.slf4j:slf4j-nop:1.6.4'
+    play 'ch.qos.logback:logback-classic:1.1.8'
+    play 'ch.qos.logback:logback-classic:1.1.8'
 }
 
 model {
