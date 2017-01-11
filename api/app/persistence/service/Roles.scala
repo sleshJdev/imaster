@@ -2,14 +2,14 @@ package persistence.service
 
 import com.google.inject.Inject
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
-import play.api.libs.json.{Json, OFormat}
+import play.api.libs.json.Json
 import slick.driver.JdbcProfile
 import slick.lifted.ProvenShape
 
 case class Role(id: Option[Long], name: String, description: String)
 
 object Role {
-  implicit val format: OFormat[Role] = Json.format[Role]
+  implicit val format = Json.format[Role]
 }
 
 class Roles @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
@@ -17,7 +17,7 @@ class Roles @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
 
   import driver.api._
 
-  val models = TableQuery[RoleTable]
+  val model = TableQuery[RoleTable]
 
   class RoleTable(tag: Tag) extends Table[Role](tag, Some("main"), "role") {
     def id: Rep[Long] = column[Long]("id", O.PrimaryKey, O.AutoInc)

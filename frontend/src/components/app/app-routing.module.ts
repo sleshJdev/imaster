@@ -1,19 +1,30 @@
 import {Router, Routes, RouterModule} from '@angular/router';
-import {AppComponent} from './app.component';
 import {LoginComponent} from '../login/login.component';
 import {HomeComponent} from '../home/home.component';
 import {NgModule} from "@angular/core";
 import {UsersComponent} from "../user/users.component";
+import {UserEditComponent} from "../user/user-edit.component";
 
 const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
-    {path: 'users', component: UsersComponent},
+    {
+        path: 'users',
+        component: UsersComponent
+    }, {
+        path: 'users/:id',
+        component: UserEditComponent
+    },
     {path: '', component: HomeComponent}
 ];
 
+const config = {
+    enableTracing: true
+};
+
+
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, config)
     ],
     exports: [
         RouterModule

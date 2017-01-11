@@ -1,15 +1,14 @@
 import {Injectable} from "@angular/core";
-import {Http, Headers, RequestOptions} from "@angular/http";
+import {HttpService} from '../common/http.service';
 
 @Injectable()
-export class UserService {
-    constructor(private http: Http) {
-    }
+export class UserService extends HttpService {
 
     getAll() {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.get('/api/users', options);
+        return this.get('/api/users');
     }
 
+    getById(id: number) {
+        return this.get(`/api/users/${id}`);
+    }
 }

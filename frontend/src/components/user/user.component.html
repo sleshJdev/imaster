@@ -1,0 +1,37 @@
+<div class="text--center">
+    <form class="form">
+        <div class="form__header">
+            <p>{{formTitle}}</p>
+        </div>
+        <div class="form__body">
+            <div class="form__row">
+                <label>
+                    <input type="text" [(ngModel)]="user.name" name="user-name">
+                    <span>Name</span>
+                </label>
+            </div>
+            <div class="form__row">
+                <label>
+                    <input type="text" [(ngModel)]="user.password" name="user-password">
+                    <span>Password</span>
+                </label>
+            </div>
+            <div class="form__row">
+                <label>
+                    <select [(ngModel)]="user.roles" name="user-roles">
+                        <option>Admin</option>
+                        <option>Teacher</option>
+                        <option>User</option>
+                    </select>
+                    <span>Role</span>
+                </label>
+            </div>
+        </div>
+        <div class="form__footer">
+            <div class="btn-group btn-group--right">
+                <input type="button" class="btn-group__item btn" (click)="location.back()" value="Cancel">
+                <input type="button" class="btn-group__item btn btn--info" value="Save">
+            </div>
+        </div>
+    </form>
+</div>

@@ -10,10 +10,11 @@ import {HomeComponent} from "../home/home.component";
 import {LoginService} from "../login/login.service";
 import {UsersComponent} from "../user/users.component";
 import {UserService} from "../user/user.service";
+import {UserEditComponent} from "../user/user-edit.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, CommonModule, AppRoutingModule],
-    declarations: [AppComponent, LoginComponent, HomeComponent, UsersComponent],
+    declarations: [AppComponent, LoginComponent, HomeComponent, UsersComponent, UserEditComponent],
     providers: [LoginService, UserService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
     bootstrap: [AppComponent]
 })
