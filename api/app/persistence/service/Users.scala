@@ -77,7 +77,7 @@ class Users @Inject()(protected val dbConfigProvider: DatabaseConfigProvider,
     def toUsers = {
       list.foreach {
         case ((u, _), r) =>
-          val user = map.put(u.id.get, u).getOrElse(u)
+          val user = map.getOrElseUpdate(u.id.get, u)
           user.roles = r :: user.roles
       }
       map.values toList
