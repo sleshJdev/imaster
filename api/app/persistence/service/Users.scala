@@ -1,6 +1,7 @@
 package persistence.service
 
 import com.google.inject.Inject
+import dto.{SearchParams, SortParams}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json.Json
@@ -31,25 +32,37 @@ class Users @Inject()(protected val dbConfigProvider: DatabaseConfigProvider,
     db.run(query).map(_.toInt)
   }
 
-  def findByName(name: String): Future[Option[User]] = {
-    db.run(model.filter(_.name === name).joinRoles.result).map(_.toUsers.headOption)
+  def findByName(name: String) = db.run(model.filter(_.name === name).joinRoles.result).map(_.toUsers.headOption)
+
+  def getById(id: Long) = db.run(model.filter(_.id === id).joinRoles.result).map(_.toUsers.headOption)
+
+  def getAll = db.run(model.joinRoles.result).map(_.toUsers)
+
+  def findAll(params: SearchParams) = {
+    db.run(model.joinRoles.sortBy(params.sort match {
+      case SortParams("name", asc) => if (asc) _._1._1.name.asc.nullsFirst else _._1._1.name.desc.nullsLast
+      case SortParams(_, asc) => if (asc) _._1._1.id.asc.nullsFirst else _._1._1.id.desc.nullsLast
+    }).result) map (_.toUsers)
   }
 
-  def getById(id: Long): Future[Option[User]] = db.run(model.filter(_.id === id).joinRoles.result).map(_.toUsers.headOption)
-
-  def getAll: Future[Seq[User]] = db.run(model.joinRoles.result).map(_.toUsers)
 
   class UserTable(tag: Tag) extends Table[User](tag, Some("main"), "user") {
     def id: Rep[Long] = column[Long]("id", O.PrimaryKey, O.AutoInc)
+
     def name: Rep[String] = column[String]("name")
+
     def password: Rep[String] = column[String]("password")
+
     type Data = (Option[Long], String, String)
+
     def toUser: Data => User = {
       case (id, name, password) => User(id, name, password)
     }
+
     def fromUser: PartialFunction[User, Option[Data]] = {
       case User(id, name, password, _) => Option((id, name, password))
     }
+
     override def * = (id.?, name, password) <> (toUser, fromUser)
   }
 
@@ -60,10 +73,14 @@ class Users @Inject()(protected val dbConfigProvider: DatabaseConfigProvider,
   }
 
   implicit class UserExtendedExtension(list: Seq[((User, (Long, Long)), Role)]) {
+    val map =  scala.collection.mutable.LinkedHashMap.empty[Long, User]
     def toUsers = {
-      list.groupBy(_._1._1).map { case (user, seq) =>
-        user.copy(roles = seq.map(_._2).toList)
-      } toList
+      list.foreach {
+        case ((u, _), r) =>
+          val user = map.put(u.id.get, u).getOrElse(u)
+          user.roles = r :: user.roles
+      }
+      map.values toList
     }
   }
 

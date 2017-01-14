@@ -1,8 +1,8 @@
-POST        /api/login            controllers.LoginController.login()
+POST        /api/login               controllers.LoginController.login()
 
-GET         /api/users            controllers.UserController.all()
-GET         /api/users/:id        controllers.UserController.getById(id: Long)
+POST        /api/users/search        controllers.UserController.search()
+GET         /api/users/:id           controllers.UserController.getById(id: Long)
 
-GET         /                     controllers.Assets.at(path="/public", file="index.html")
+GET         /                        controllers.Assets.at(path="/public", file="index.html")
 
-GET         /assets/*file         controllers.Assets.at(path="/public", file)
+GET         /assets/*file            controllers.Assets.at(path="/public", file)

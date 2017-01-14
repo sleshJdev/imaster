@@ -15,4 +15,7 @@ export class HttpService {
         return this.http.get(url, this.options);
     }
 
+    post(url: string, data: any) {
+        return this.http.post(url, data, this.options);
+    }
 }

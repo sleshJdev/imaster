@@ -4,8 +4,10 @@
     </caption>
     <thead>
     <tr>
-        <th>Id</th>
-        <th>Name</th>
+        <th (click)="sort(sortFields.fields.id)">
+            Id
+        </th>
+        <th (click)="sort(sortFields.fields.name)">Name</th>
         <th>Role(s)</th>
     </tr>
     </thead>

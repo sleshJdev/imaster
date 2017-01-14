@@ -11,4 +11,8 @@ export class UserService extends HttpService {
     getById(id: number) {
         return this.get(`/api/users/${id}`);
     }
+
+    search(searchParams: any) {
+        return this.post('/api/users/search', searchParams);
+    }
 }
