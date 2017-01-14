@@ -5,8 +5,8 @@ import {Router} from "@angular/router";
 
 @Component({
     selector: 'login',
-    styleUrls: ['./login.component.less'],
-    templateUrl: './login.component.html'
+    styleUrls: ['login.component.less'],
+    templateUrl: 'login.component.html'
 })
 export class LoginComponent {
     private username: string;

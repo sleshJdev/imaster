@@ -19,6 +19,8 @@ class Roles @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
 
   val model = TableQuery[RoleTable]
 
+  def getAll = db.run(model.result)
+
   class RoleTable(tag: Tag) extends Table[Role](tag, Some("main"), "role") {
     def id: Rep[Long] = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def name: Rep[String] = column[String]("name")

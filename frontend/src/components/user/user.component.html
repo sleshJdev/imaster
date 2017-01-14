@@ -6,25 +6,26 @@
         <div class="form__body">
             <div class="form__row">
                 <label>
-                    <input type="text" [(ngModel)]="user.name" name="user-name">
-                    <span>Name</span>
+                    <input class="form__input" type="text" [(ngModel)]="user.name" name="user-name">
+                    <span class="form__label">Name</span>
                 </label>
             </div>
             <div class="form__row">
                 <label>
-                    <input type="text" [(ngModel)]="user.password" name="user-password">
-                    <span>Password</span>
+                    <input class="form__input" type="text" [(ngModel)]="user.password" name="user-password">
+                    <span class="form__label">Password</span>
                 </label>
             </div>
             <div class="form__row">
-                <label>
-                    <select [(ngModel)]="user.roles" name="user-roles">
-                        <option>Admin</option>
-                        <option>Teacher</option>
-                        <option>User</option>
-                    </select>
-                    <span>Role</span>
-                </label>
+                <span class="form__label">Role(s)</span>
+                <ul class="form__input checkbox-list">
+                    <li *ngFor="let role of roles">
+                        <label>
+                            <input type="checkbox" checked="{{role.checked ? 'checked' : ''}}">
+                            <span>{{role.name}}</span>
+                        </label>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="form__footer">

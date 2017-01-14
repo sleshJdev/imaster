@@ -3,17 +3,21 @@
 .btn {
   display: inline-block;
   border: none;
-  color: @default-black;
-  cursor: pointer;
   padding: 0.5em 1em;
-  text-decoration: none;
+
+  color: @default-black;
   background-color: @default-white;
+
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
   &:hover {
     background-color: @default-gray;
   }
   &:active {
-    position: relative;
     top: 1px;
+    position: relative;
   }
 }
 
@@ -21,7 +25,7 @@
   color: @default-white;
   background-color: @success-color;
   &:hover {
-    background-color: darken(@success-color, 10%) !important;
+    background-color: darken(@success-color, 10%);
   }
 }
 
@@ -29,7 +33,7 @@
   color: @default-white;
   background-color: @warning-color;
   &:hover {
-    background-color: darken(@warning-color, 10%) !important;
+    background-color: darken(@warning-color, 10%);
   }
 }
 
@@ -37,7 +41,7 @@
   color: @default-white;
   background-color: @error-color;
   &:hover {
-    background-color: darken(@error-color, 10%) !important;
+    background-color: darken(@error-color, 10%);
   }
 }
 
@@ -47,6 +51,10 @@
   &:hover {
     background-color: darken(@info-color, 10%) !important;
   }
+}
+
+.btn-group{
+
 }
 
 .btn-group--right {

@@ -1,12 +1,8 @@
 <table class="table">
-    <caption>
-        Users
-    </caption>
+    <caption>Users</caption>
     <thead>
     <tr>
-        <th (click)="sort(sortFields.fields.id)">
-            Id
-        </th>
+        <th (click)="sort(sortFields.fields.id)">Id</th>
         <th (click)="sort(sortFields.fields.name)">Name</th>
         <th>Role(s)</th>
     </tr>
@@ -15,9 +11,7 @@
     <tr *ngFor="let user of users" (click)="edit(user)">
         <td>{{user.id}}</td>
         <td>{{user.name}}</td>
-        <td>
-            <span *ngFor="let role of user.roles; let last=last">{{role.name}}{{last ? '' : ','}}</span>
-        </td>
+        <td><span *ngFor="let role of user.roles; let last=last">{{role.name}}{{last ? '' : ','}}</span></td>
     </tr>
     </tbody>
 </table>

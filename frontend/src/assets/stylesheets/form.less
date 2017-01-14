@@ -1,42 +1,91 @@
 @import "./color.less";
 
+.form-wrapper--form-center {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.form-wrapper--form-left {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.form-wrapper--form-right {
+  text-align: right;
+  vertical-align: middle;
+}
+
 .form {
   display: inline-block;
+  padding: 0.6em 0.8em;
   border: 1px solid @default-gray;
-  padding: 0.5em;
 
   .form__header {
-    text-align: right;
-    vertical-align: middle;
+    padding: 0 0.5em;
     border-bottom: 1px solid @default-gray;
-    padding-right: 0.5em;
-    padding-left: 0.5em;
+
+    vertical-align: middle;
+    text-align: right;
   }
 
   .form__body {
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
-    padding-left: 0.5em;
-    padding-right: 1em;
+    margin: 0.5em 0;
   }
 
   .form__footer {
     clear: both;
   }
 
+  .form__input {
+    margin-left: 0.5em;
+    padding: 0.2em 0.5em;
+  }
+
+  .form__label {
+    display: inline-block;
+    min-width: 5em;
+
+    text-align: right;
+  }
+
   .form__row {
-    margin-bottom: 0.7em;
-    label {
+    margin: 1em 0;
+    & > .form__label {
+      float: left;
+    }
+    & > .form__input {
+      float: left;
+    }
+  }
+
+  .form__row > label {
+    display: inline-block;
+    width: 100%;
+    .form__label {
+      display: inline-block;
+      padding-top: 0.5em;
+    }
+
+    .form__input {
+      float: right;
+    }
+    select.form__input {
+      background-color: #ffffff;
+    }
+  }
+}
+
+.checkbox-list {
+  margin: 0;
+
+  list-style: none;
+  text-transform: capitalize;
+  li {
+    & > label {
       display: inline-block;
       width: 100%;
-      line-height: 2em;
+
       text-align: left;
-    }
-    input, select, textarea {
-      width: auto;
-      float: right;
-      padding: 0.5em;
-      margin-left: 0.5em;
     }
   }
 }
