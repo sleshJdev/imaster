@@ -27,7 +27,7 @@ export class UserEditComponent implements OnInit {
             .getById(+params['id'])
             .subscribe(response => {
                 this.user = response.json();
-                this.roleService.getAll() .subscribe(response => {
+                this.roleService.getAll().subscribe(response => {
                     this.roles = response.json();
                     this.roles.forEach((x: any) => {
                         x.checked = !isUndefined(this.user.roles.find((r: any) => r.id === x.id));

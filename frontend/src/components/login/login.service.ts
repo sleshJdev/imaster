@@ -21,9 +21,9 @@ export class LoginService {
     authenticate(username: string, password: string) {
         let body = {name: username, password: password};
         let headers = new Headers({'Content-Type': 'application/json'});
-        let o = this.http.post('/api/login', body, headers).map(response => response.json());
-        o.subscribe(userDetails => this.userDetails = userDetails, noop, noop);
-        return o;
+        let promise = this.http.post('/api/login', body, headers).map(response => response.json()).toPromise();
+        promise.then(userDetails => this.userDetails = userDetails);
+        return promise;
     }
 
     logout() {

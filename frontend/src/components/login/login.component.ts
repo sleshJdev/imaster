@@ -24,6 +24,6 @@ export class LoginComponent {
     login() {
         return this.loginService
             .authenticate(this.username, this.password)
-            .subscribe(() => this.gotoHome());
+            .then(() => this.gotoHome());
     }
 }
