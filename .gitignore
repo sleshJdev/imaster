@@ -1,6 +1,7 @@
 *.iml
 *.ipr
 *.iws
+*.log
 .idea/
 
 /api/public/
@@ -9,5 +10,9 @@
 /frontend/build/
 /frontend/typings/
 
-/.gradle/
+.gradle/
+build/
 *.swp
+
+dataSources/
+.ideaDataSources/
