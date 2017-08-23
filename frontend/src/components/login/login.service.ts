@@ -1,10 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from "@angular/http";
-import {noop} from "rxjs/util/noop";
 import {isNullOrUndefined} from "util";
+import {RequestOptions} from "@angular/http";
 
 @Injectable()
 export class LoginService {
+    private requestOptions = new RequestOptions({
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    });
     private userDetails: any;
 
     constructor(private http: Http) {
@@ -20,9 +25,9 @@ export class LoginService {
 
     authenticate(username: string, password: string) {
         let body = {name: username, password: password};
-        let headers = new Headers({'Content-Type': 'application/json'});
-        let promise = this.http.post('/api/login', body, headers).map(response => response.json()).toPromise();
-        promise.then(userDetails => this.userDetails = userDetails);
+        let promise = this.http.post('/api/login', body, this.requestOptions)
+            .map((response: any) => response.json()).toPromise();
+        promise.then((userDetails: any) => this.userDetails = userDetails);
         return promise;
     }
 
