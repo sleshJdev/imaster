@@ -2,6 +2,6 @@ task clean(type: Delete) { delete buildDir }
 
 task install(type: Exec, dependsOn: clean) { commandLine 'npm', 'install' }
 
-task bundle(type: Exec, depependsOn: install) { commandLine 'npm', 'run', 'bundle' }
+task bundle(type: Exec, dependsOn: install) { commandLine 'npm', 'run', 'bundle' }
 
 task watch(type: Exec) { commandLine 'npm', 'run', 'watch' }
