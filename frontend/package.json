@@ -2,7 +2,7 @@
   "scripts": {
     "postinstall": "typings install",
     "watch": "webpack-dev-server --display-error-details --display-reasons --display-chunks --progress --config webpack.dev.config.js",
-    "build": "webpack --config webpack.prod.config.js"
+    "bundle": "webpack --config webpack.prod.config.js"
   },
   "browserslist": [
     "> 5%",
