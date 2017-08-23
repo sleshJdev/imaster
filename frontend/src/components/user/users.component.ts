@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
     }
 
     sort(field: any) {
-        Object.values(this.sortFields).forEach(x => { x.enabled = false; });
+        Object.values(this.sortFields.fields).forEach(it => it.enabled = false);
         field.asc = !field.asc;
         field.enabled = true;
         this.sortFields.field = field;

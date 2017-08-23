@@ -6,7 +6,7 @@ allprojects {
 
 task clean(dependsOn: [':api:clean', ':frontend:clean'])
 
-task dist(dependsOn: [clean, ':frontend:build']) {
+task dist(dependsOn: [clean, ':frontend:bundle']) {
     mustRunAfter clean
     doFirst {
         file('./frontend/build').renameTo(file('./api/public'))

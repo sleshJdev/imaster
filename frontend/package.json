@@ -1,13 +1,8 @@
 {
-  "bin": {
-    "typings": "./typings",
-    "webpack": "./webpack",
-    "webpackDevServer": "./webpack-dev-server"
-  },
   "scripts": {
     "postinstall": "typings install",
-    "watch": "npm-run webpack-dev-server --display-error-details --display-reasons --display-chunks --progress --config webpack.dev.config.js",
-    "build": "npm-run webpack --config webpack.prod.config.js"
+    "watch": "webpack-dev-server --display-error-details --display-reasons --display-chunks --progress --config webpack.dev.config.js",
+    "build": "webpack --config webpack.prod.config.js"
   },
   "browserslist": [
     "> 5%",

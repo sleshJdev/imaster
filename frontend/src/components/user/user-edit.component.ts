@@ -23,16 +23,19 @@ export class UserEditComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.route.params.subscribe((params: Params) => this.userService
-            .getById(+params['id'])
-            .subscribe(response => {
-                this.user = response.json();
-                this.roleService.getAll().subscribe(response => {
-                    this.roles = response.json();
-                    this.roles.forEach((x: any) => {
-                        x.checked = !isUndefined(this.user.roles.find((r: any) => r.id === x.id));
-                    });
-                }, noop, noop);
-            }, noop, noop));
+        this.route.params
+            .subscribe((params: Params) =>
+                this.userService
+                    .getById(+params['id'])
+                    .subscribe(response => {
+                        this.user = response.json();
+                        this.roleService.getAll().subscribe(response => {
+                            this.roles = response.json();
+                            this.roles.forEach((role: any) => {
+                                let userRole = this.user.roles.find((userRole: any) => userRole.id === role.id);
+                                role.checked = !isUndefined(userRole);
+                            });
+                        }, noop, noop);
+                    }, noop, noop));
     }
 }
