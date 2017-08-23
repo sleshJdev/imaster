@@ -9,6 +9,12 @@ task clean(dependsOn: [':api:clean', ':frontend:clean'])
 task dist(dependsOn: [clean, ':frontend:bundle']) {
     mustRunAfter clean
     doFirst {
-        file('./frontend/build').renameTo(file('./api/public'))
+        def from = file('./frontend/build')
+        def to = file('./api/public')
+        println "copy frontend bundle from ${from} to ${to}"
+        from.renameTo(to)
+    }
+    doLast {
+        println "done"
     }
 }
