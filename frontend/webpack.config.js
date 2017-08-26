@@ -3,72 +3,91 @@ const webpack = require('webpack'),
     ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function (params) {
-    var q = (params.ienv === 'dev' ? '&sourceMap' : '');
+    var sourceMap = (params.ienv === 'dev' ? '&sourceMap' : '');
+    var lessExtractor = ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [{
+            loader: 'to-string-loader'
+        }, {
+            loader: 'css-loader',
+            options: {
+                sourceMap: true
+            }
+        }, {
+            loader: 'postcss-loader',
+            options: {
+                sourceMap: true
+            }
+        }, {
+            loader: 'less-loader',
+            options: {
+                sourceMap: true
+            }
+        }]
+    });
     return {
-        context: __dirname + '/src'
-        , entry: {
+        context: __dirname + '/src',
+        entry: {
             bundle: './main'
-        }
-        , output: {
-            path: __dirname + '/build'
-            , publicPath: params.publicPath
-            , filename: 'scripts/[name].js'
-        }
-
-        , resolve: {
-            modulesDirectories: ['node_modules'],
-            extensions: ['', '.js', '.ts']
-        }
-
-        , resolveLoader: {
-            modulesDirectories: ['node_modules'],
-            moduleTemplates: ['*-loader', '*'],
-            extensions: ['', '.js']
-        }
-
-        , module: {
-            loaders: [
+        },
+        output: {
+            path: __dirname + '/build',
+            publicPath: params.publicPath,
+            filename: 'scripts/[name].js'
+        },
+        resolve: {
+            modules: ['node_modules'],
+            extensions: ['.ts', '.js']
+        },
+        resolveLoader: {
+            modules: ['node_modules'],
+            extensions: ['.js']
+        },
+        module: {
+            rules: [
                 {
                     test: /\.ts$/,
-                    loader: 'awesome-typescript!angular2-template'
-                }
-                , {
+                    use: [{
+                        loader: 'awesome-typescript-loader'
+                    }, {
+                        loader: 'angular2-template-loader'
+                    }]
+                }, {
                     test: /\.html$/,
                     exclude: /assets\//,
-                    loader: 'raw'
-                }
-                , {
+                    use: [{
+                        loader: 'raw-loader'
+                    }]
+                }, {
                     test: /\.less$/,
                     exclude: /assets\//,
-                    loader: 'raw!postcss!less?relativeUrls' + q
-                }
-                , {
+                    use: lessExtractor
+                }, {
                     test: /\.less$/,
                     include: /assets\/stylesheets\//,
-                    loader: ExtractTextPlugin.extract('style',
-                        'css?importLoaders=1' + q + '!postcss!less?relativeUrls' + q)
-                }
-                , {
+                    use: lessExtractor
+                }, {
                     test: /\.*$/,
-                    include: /assets\/images\//,
-                    loader: 'file?name=[1].[ext]&regExp=assets/(.*)'
-                }
-                , {
-                    test: /\.*$/,
-                    include: /assets\/icons\//,
-                    loader: 'file?name=[1].[ext]&regExp=assets/(.*)'
+                    include: /(assets\/icons\/|assets\/images\/)/,
+                    use: [{
+                        loader: 'file-loader',
+                        options: {
+                            name: '[1].[ext]',
+                            regExp: /assets\/(.*)/
+                        }
+                    }]
                 }
             ]
-        }
+        },
 
-        , plugins: [
-            new ExtractTextPlugin('styles/style.css', {allChunks: true})
-            , new webpack.NoErrorsPlugin()
-            , new webpack.optimize.CommonsChunkPlugin({
+        plugins: [
+            new ExtractTextPlugin('styles/style.css', {allChunks: true}),
+            new webpack.NoEmitOnErrorsPlugin(),
+            new webpack.optimize.CommonsChunkPlugin({
                 name: 'vendor',
                 minChunks: Infinity
-            })
-            , new HtmlWebpackPlugin({
+            }),
+            new HtmlWebpackPlugin({
                 favicon: './favicon.ico',
                 template: './index.html'
             })

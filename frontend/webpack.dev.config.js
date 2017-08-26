@@ -1,16 +1,23 @@
-var baseConfig = require('./webpack.config')({
+const webpack = require('webpack');
+
+const baseConfig = require('./webpack.config')({
     ienv: 'dev',
     publicPath: '/'
 });
 
+baseConfig.plugins.push(
+    new webpack.LoaderOptionsPlugin({
+        debug: true
+    })
+);
+
 var webpackDevConfig = Object.assign(baseConfig, {
-    debug: true
-    , devtool: 'source-map'
-    , watch: true
-    , watchOptions: {
+    devtool: 'source-map',
+    watch: true,
+    watchOptions: {
         aggregationTimeout: 500
-    }
-    , devServer: {
+    },
+    devServer: {
         port: 8999,
         contentBase: baseConfig.context,
         proxy: {

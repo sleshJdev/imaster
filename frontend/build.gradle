@@ -4,4 +4,4 @@ task install(type: Exec, dependsOn: clean) { commandLine 'npm', 'install' }
 
 task bundle(type: Exec, dependsOn: install) { commandLine 'npm', 'run', 'bundle' }
 
-task watch(type: Exec) { commandLine 'npm', 'run', 'watch' }
+task watch(type: Exec, dependsOn: clean) { commandLine 'npm', 'run', 'watch' }

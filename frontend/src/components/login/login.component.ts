@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 
 @Component({
     selector: 'login',
-    styleUrls: ['login.component.less'],
+    styles: [String(require('./login.component.less'))],
     templateUrl: 'login.component.html'
 })
 export class LoginComponent {

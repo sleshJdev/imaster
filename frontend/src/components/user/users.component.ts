@@ -1,12 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "./user.service";
-import {noop} from "rxjs/util/noop";
 import {Router} from "@angular/router";
 
 @Component({
     selector: 'users',
     templateUrl: 'users.component.html',
-    styleUrls: ['users.component.less']
+    styles: [String(require('./users.component.less'))]
 })
 export class UsersComponent implements OnInit {
     private users: any[];
@@ -33,7 +32,11 @@ export class UsersComponent implements OnInit {
     }
 
     sort(field: any) {
-        Object.values(this.sortFields.fields).forEach(it => it.enabled = false);
+        Object.keys(this.sortFields.fields)
+            .forEach(fieldName => {
+                let field = this.sortFields.fields[fieldName];
+                field.enabled = false;
+            });
         field.asc = !field.asc;
         field.enabled = true;
         this.sortFields.field = field;
@@ -43,6 +46,6 @@ export class UsersComponent implements OnInit {
     search() {
         this.userService.search({
             sort: this.sortFields.field
-        }).subscribe(response => this.users = response.json(), noop, noop);
+        }).subscribe((response: any) => this.users = response.json());
     }
 }
