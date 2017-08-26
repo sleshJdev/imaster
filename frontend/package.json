@@ -39,6 +39,6 @@
     "zone.js": "^0.8.17"
   },
   "description": "Lightweight master manager",
-  "reposiotory": "https://github.com/sleshJdev/imaster.git",
+  "repository": "https://github.com/sleshJdev/imaster.git",
   "license": "MIT"
 }
