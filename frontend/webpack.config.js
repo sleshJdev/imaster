@@ -7,8 +7,6 @@ module.exports = function (params) {
     var lessExtractor = ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [{
-            loader: 'to-string-loader'
-        }, {
             loader: 'css-loader',
             options: {
                 sourceMap: true
