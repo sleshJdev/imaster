@@ -1,6 +1,5 @@
 {
   "scripts": {
-    "postinstall": "typings install",
     "watch": "webpack-dev-server  --progress --config webpack.dev.config.js",
     "bundle": "webpack --config webpack.prod.config.js"
   },
