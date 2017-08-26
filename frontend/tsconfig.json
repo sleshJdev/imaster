@@ -10,14 +10,14 @@
       "es2015",
       "dom"
     ],
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
     "noImplicitThis": false,
     "noUnusedParameters": false,
-    "noUnusedLocals": true,
-    "removeComments": true,
-    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": false,
+    "removeComments": false,
+    "suppressImplicitAnyIndexErrors": false,
     "typeRoots": [
       "./node_modules/@types/"
     ]
